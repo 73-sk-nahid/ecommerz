@@ -1,4 +1,3 @@
-import 'package:ecommerz/app/app_colors.dart';
 import 'package:ecommerz/app/assets_path.dart';
 import 'package:ecommerz/features/home/ui/widgets/app_bar_icon_button.dart';
 import 'package:ecommerz/features/home/ui/widgets/home_carousel_slider.dart';
@@ -6,8 +5,9 @@ import 'package:ecommerz/features/home/ui/widgets/product_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../widgets/category_item_widget.dart';
+import '../../../common/ui/widgets/category_item_widget.dart';
 import '../widgets/home_section_header.dart';
+import '../widgets/product_item_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,50 +30,97 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
-                const SizedBox(
-                  height: 16,
-                ),
+                _sizedBox16(),
                 ProductSearchBar(controller: _searchBarController),
-                const SizedBox(
-                  height: 16,
-                ),
+                _sizedBox16(),
                 const HomeCarouselSlider(),
-                const SizedBox(
-                  height: 16,
-                ),
+                _sizedBox8(),
                 HomeSectionHeader(
                   title: 'Category',
                   onTap: () {},
                 ),
-                const SizedBox(height: 8,),
+                _sizedBox8(),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: _getCategoryList(),
                   ),
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
+                _sizedBox8(),
                 HomeSectionHeader(
                   title: 'Popular',
                   onTap: () {},
                 ),
+                _sizedBox8(),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: _getProductList(),
+                  ),
+                ),
+                _sizedBox8(),
+                HomeSectionHeader(
+                  title: 'Special',
+                  onTap: () {},
+                ),
+                _sizedBox8(),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: _getProductList(),
+                  ),
+                ),
+                _sizedBox8(),
+                HomeSectionHeader(
+                  title: 'New',
+                  onTap: () {},
+                ),
+                _sizedBox8(),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: _getProductList(),
+                  ),
+                ),
+                _sizedBox8(),
               ],
             ),
           ),
         ));
   }
 
+  SizedBox _sizedBox8() {
+    return const SizedBox(
+                height: 8,
+              );
+  }
+
+  SizedBox _sizedBox16() {
+    return const SizedBox(
+                height: 16,
+              );
+  }
+
   List<Widget> _getCategoryList() {
     List<Widget> categoryList = [];
     for (int i = 0; i < 10; i++) {
-      categoryList.add(Padding(
-        padding: const EdgeInsets.only(right: 16.0),
-        child: const CategoryItemWidget(),
+      categoryList.add(const Padding(
+        padding: EdgeInsets.only(right: 8.0),
+        child: CategoryItemWidget(),
       ));
     }
     return categoryList;
+  }
+
+  List<Widget> _getProductList() {
+    List<Widget> productList = [];
+    for (int i = 0; i < 10; i++) {
+      productList.add(const Padding(
+        padding: EdgeInsets.only(right: 8.0),
+        child: ProductItemWidget(),
+      ));
+    }
+    return productList;
   }
 
   AppBar _buildAppBar() {

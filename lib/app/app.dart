@@ -1,10 +1,10 @@
-import 'package:ecommerz/app/app_colors.dart';
 import 'package:ecommerz/app/app_theme_data.dart';
 import 'package:ecommerz/app/controller_binder.dart';
 import 'package:ecommerz/features/auth/ui/screens/complete_profile_screen.dart';
 import 'package:ecommerz/features/auth/ui/screens/email_verify_screen.dart';
 import 'package:ecommerz/features/auth/ui/screens/otp_verify_screen.dart';
 import 'package:ecommerz/features/auth/ui/screens/splash_screen.dart';
+import 'package:ecommerz/features/category/ui/screens/category_list_screen.dart';
 import 'package:ecommerz/features/common/ui/screens/main_bottom_nav_screen.dart';
 import 'package:ecommerz/features/home/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +28,7 @@ class CraftyBay extends StatelessWidget {
         CompleteProfileScreen.name : (context) => const CompleteProfileScreen(),
         HomeScreen.name : (context) => const HomeScreen(),
         MainBottomNavScreen.name : (context) => const MainBottomNavScreen(),
+        CategoryListScreen.name : (context) => const CategoryListScreen(),
       },
     );
   }
