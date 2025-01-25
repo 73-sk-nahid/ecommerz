@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 
 import '../../../common/ui/widgets/category_item_widget.dart';
 import '../widgets/home_section_header.dart';
-import '../widgets/product_item_widget.dart';
+import '../../../common/ui/widgets/product_item_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
