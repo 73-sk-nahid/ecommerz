@@ -62,7 +62,6 @@ class _ProductImageCarouselSliderState extends State<ProductImageCarouselSlider>
                           color: value == i
                               ? AppColors.themeColor
                               : Colors.white,
-                          border: Border.all(color: Colors.grey.shade200),
                           borderRadius: BorderRadius.circular(20),
                         ),
                       )
