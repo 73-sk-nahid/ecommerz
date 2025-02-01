@@ -1,7 +1,8 @@
+import 'package:ecommerz/features/cart/ui/screens/cart_list_screens.dart';
 import 'package:ecommerz/features/category/ui/screens/category_list_screen.dart';
 import 'package:ecommerz/features/common/ui/controllers/main_bottom_nav_controller.dart';
 import 'package:ecommerz/features/home/ui/screens/home_screen.dart';
-import 'package:ecommerz/features/product/ui/screens/product_review_screen.dart';
+import 'package:ecommerz/features/wishlist/ui/screens/wish_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,8 +19,8 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   final List<Widget> _screens = const [
     HomeScreen(),
     CategoryListScreen(),
-    ProductReviewScreen(),
-    HomeScreen()
+    CartListScreens(),
+    WishListScreen()
   ];
   @override
   Widget build(BuildContext context) {
