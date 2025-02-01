@@ -47,11 +47,13 @@ class _SizePickerWidgetState extends State<SizePickerWidget> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        height: 45,
+        width: 45,
         padding: const EdgeInsets.all(8),
         margin: const EdgeInsets.only(right: 8),
         decoration: BoxDecoration(
           border: Border.all(),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(32),
           color: isSelected ? AppColors.themeColor : Colors.transparent,
         ),
         alignment: Alignment.center,

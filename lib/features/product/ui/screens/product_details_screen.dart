@@ -1,7 +1,7 @@
 import 'package:ecommerz/app/app_colors.dart';
 import 'package:ecommerz/features/product/ui/widgets/color_picker_widget.dart';
 import 'package:ecommerz/features/product/ui/widgets/product_image-carousel_slider.dart';
-import 'package:ecommerz/features/product/ui/widgets/prudct_quantity_inc_dec_button.dart';
+import 'package:ecommerz/features/common/ui/widgets/prudct_quantity_inc_dec_button.dart';
 import 'package:ecommerz/features/product/ui/widgets/size_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:lorem_ipsum/lorem_ipsum.dart';
@@ -131,6 +131,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Price',
