@@ -1,6 +1,4 @@
-import 'package:ecommerz/features/auth/ui/screens/email_verify_screen.dart';
 import 'package:ecommerz/features/common/ui/screens/main_bottom_nav_screen.dart';
-import 'package:ecommerz/features/home/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/app_logo_widget.dart';

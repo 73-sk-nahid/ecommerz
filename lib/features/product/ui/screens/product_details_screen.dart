@@ -125,6 +125,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           padding: EdgeInsets.all(16.0),
           decoration: BoxDecoration(
             color: AppColors.themeColor.withOpacity(0.2),
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

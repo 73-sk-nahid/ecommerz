@@ -9,6 +9,7 @@ import 'package:ecommerz/features/common/ui/screens/main_bottom_nav_screen.dart'
 import 'package:ecommerz/features/home/ui/screens/home_screen.dart';
 import 'package:ecommerz/features/product/ui/screens/product_details_screen.dart';
 import 'package:ecommerz/features/product/ui/screens/product_list_screen.dart';
+import 'package:ecommerz/features/product/ui/screens/product_review_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,6 +46,9 @@ class CraftyBay extends StatelessWidget {
         } else if (settings.name == ProductDetailsScreen.name) {
           int productId = settings.arguments as int;
           widget = ProductDetailsScreen(productId: productId,);
+        }
+        else if (settings.name == ProductReviewScreen.name) {
+          widget = const ProductReviewScreen();
         }
         return MaterialPageRoute(builder: (ctx) {
           return widget;
