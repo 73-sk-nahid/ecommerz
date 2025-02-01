@@ -1,46 +1,46 @@
 import 'package:ecommerz/app/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class ColorPickerWidget extends StatefulWidget {
-  const ColorPickerWidget({super.key, required this.colors, required this.onColorSelected});
+class SizePickerWidget extends StatefulWidget {
+  const SizePickerWidget({super.key, required this.sizes, required this.onSizeSelected});
 
-  final List<String> colors;
-  final Function(String) onColorSelected;
+  final List<String> sizes;
+  final Function(String) onSizeSelected;
 
   @override
-  State<ColorPickerWidget> createState() => _ColorPickerWidgetState();
+  State<SizePickerWidget> createState() => _SizePickerWidgetState();
 }
 
-class _ColorPickerWidgetState extends State<ColorPickerWidget> {
-  String? _selectedColor;
+class _SizePickerWidgetState extends State<SizePickerWidget> {
+  String? _selectedSize;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: _getColorItems(),
+        children: _getSizeItems(),
       ),
     );
   }
 
-  List<Widget> _getColorItems() {
-    List<Widget> colorItemWidgetList = [];
-    for (String color in widget.colors) {
-      Widget item =getColorItemWidget(
-          name: color,
+  List<Widget> _getSizeItems() {
+    List<Widget> sizeItemWidgetList = [];
+    for (String size in widget.sizes) {
+      Widget item =getSizeItemWidget(
+          name: size,
           onTap: () {
-            _selectedColor = color;
-            widget.onColorSelected(_selectedColor!);
+            _selectedSize = size;
+            widget.onSizeSelected(_selectedSize!);
             setState(() {});
           },
-          isSelected: _selectedColor == color);
-      colorItemWidgetList.add(item);
+          isSelected: _selectedSize == size);
+      sizeItemWidgetList.add(item);
     }
-    return colorItemWidgetList;
+    return sizeItemWidgetList;
   }
 
-  Widget getColorItemWidget(
+  Widget getSizeItemWidget(
       {required String name,
       required VoidCallback onTap,
       required bool isSelected}) {
@@ -51,6 +51,7 @@ class _ColorPickerWidgetState extends State<ColorPickerWidget> {
         margin: const EdgeInsets.only(right: 8),
         decoration: BoxDecoration(
           border: Border.all(),
+          borderRadius: BorderRadius.circular(16),
           color: isSelected ? AppColors.themeColor : Colors.transparent,
         ),
         alignment: Alignment.center,
