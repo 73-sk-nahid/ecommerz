@@ -1,4 +1,4 @@
-import 'package:ecommerz/features/common/ui/screens/main_bottom_nav_screen.dart';
+import 'package:ecommerz/features/auth/ui/screens/email_verify_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/app_logo_widget.dart';
@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _moveToNextScreen() async{
     await Future.delayed(const Duration(seconds: 2));
-    Navigator.pushReplacementNamed(context, MainBottomNavScreen.name);
+    Navigator.pushReplacementNamed(context, EmailVerifyScreen.name);
   }
   @override
   Widget build(BuildContext context) {

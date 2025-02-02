@@ -37,6 +37,8 @@ dev_dependencies:
   get:
   carousel_slider:
   lorem_ipsum:
+  http:
+  logger:
 
 flutter:
 

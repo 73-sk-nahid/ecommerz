@@ -1,6 +1,8 @@
-import 'package:ecommerz/features/auth/ui/screens/otp_verify_screen.dart';
+import 'package:ecommerz/features/auth/ui/controllers/email_verify_controller.dart';
 import 'package:ecommerz/features/auth/ui/widgets/app_logo_widget.dart';
+import 'package:ecommerz/features/common/ui/widgets/centered_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class EmailVerifyScreen extends StatefulWidget {
   const EmailVerifyScreen({super.key});
@@ -14,6 +16,8 @@ class EmailVerifyScreen extends StatefulWidget {
 class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
   final TextEditingController _emailTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final EmailVerifyController _emailVerifyController =
+      Get.find<EmailVerifyController>();
 
   @override
   Widget build(BuildContext context) {
@@ -60,18 +64,18 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
                 TextFormField(
                   keyboardType: TextInputType.emailAddress,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (String? value){
-                    if(value?.trim().isEmpty ?? true) // check is it empty
+                  validator: (String? value) {
+                    if (value?.trim().isEmpty ?? true) // check is it empty
                     {
                       return 'Enter E-mail address';
                     }
-                    if(validateEmail(value) == false) // checking valid E-mail Address
+                    if (validateEmail(value) ==
+                        false) // checking valid E-mail Address
                     {
                       return 'Enter Valid E-mail';
                     }
                     return null;
                   },
-
                   controller: _emailTEController,
                   decoration: const InputDecoration(
                     hintText: "Email Address",
@@ -80,15 +84,25 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
                 const SizedBox(
                   height: 24,
                 ),
-                ElevatedButton(onPressed: () {
-                  // if(_formKey.currentState!.validate()){}
-                  Navigator.pushNamed(context, OTPVerifyScreen.name);
-                }, child: const Text("Next")),
+                //elevated button here
+                GetBuilder<EmailVerifyController>(builder: (controller) {
+                  if (controller.inProgress) {
+                    return const CenteredCircularProgressIndicator();
+                  }
+                  return ElevatedButton(
+                      onPressed: _onTapNextButton, child: const Text("Next"));
+                }),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  void _onTapNextButton() {
+    if (_formKey.currentState!.validate()) {
+      _emailVerifyController.verifyEmail(_emailTEController.text.trim());
+    }
   }
 }
