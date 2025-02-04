@@ -1,6 +1,8 @@
 import 'package:ecommerz/features/auth/ui/controllers/email_verify_controller.dart';
+import 'package:ecommerz/features/auth/ui/screens/otp_verify_screen.dart';
 import 'package:ecommerz/features/auth/ui/widgets/app_logo_widget.dart';
 import 'package:ecommerz/features/common/ui/widgets/centered_circular_progress_indicator.dart';
+import 'package:ecommerz/features/common/ui/widgets/snackbar_message.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -82,7 +84,7 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 24,
+                  height: 16,
                 ),
                 //elevated button here
                 GetBuilder<EmailVerifyController>(builder: (controller) {
@@ -100,9 +102,19 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
     );
   }
 
-  void _onTapNextButton() {
+  void _onTapNextButton() async {
     if (_formKey.currentState!.validate()) {
-      _emailVerifyController.verifyEmail(_emailTEController.text.trim());
+      bool isSuccess = await _emailVerifyController
+          .verifyEmail(_emailTEController.text.trim());
+      if (isSuccess) {
+        if (mounted) {
+          Navigator.pushNamed(context, OTPVerifyScreen.name);
+        }
+      } else {
+        if (mounted) {
+          showSnackBarMessage(context, _emailVerifyController.errorMessage!);
+        }
+      }
     }
   }
 }

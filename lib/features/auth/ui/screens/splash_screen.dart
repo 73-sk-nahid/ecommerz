@@ -1,3 +1,4 @@
+import 'package:ecommerz/features/auth/ui/screens/complete_profile_screen.dart';
 import 'package:ecommerz/features/auth/ui/screens/email_verify_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _moveToNextScreen() async{
     await Future.delayed(const Duration(seconds: 2));
-    Navigator.pushReplacementNamed(context, EmailVerifyScreen.name);
+    Navigator.pushReplacementNamed(context, CompleteProfileScreen.name);
   }
   @override
   Widget build(BuildContext context) {
