@@ -50,7 +50,7 @@ class NetworkCaller {
       Response response =
       await post(uri, headers: headers, body: jsonEncode(body));
       _logResponse(url, response.statusCode, response.headers, response.body);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         final decodedMessage = jsonDecode(response.body);
         return NetworkResponse(
             isSuccess: true,
@@ -66,48 +66,6 @@ class NetworkCaller {
           isSuccess: false, statusCode: -1, errorMessage: e.toString());
     }
   }
-
-  Future<NetworkResponse> postRequestUsingModel(String url, {dynamic body}) async {
-    try {
-      Uri uri = Uri.parse(url);
-      Map<String, String> headers = {
-        'Content-Type': 'application/json',
-      };
-
-      // Log the request
-      _logRequest(url, headers, body);
-
-      // Ensure `body` is properly converted to JSON string
-      String jsonBody = (body is String) ? body : jsonEncode(body);
-
-      Response response = await post(uri, headers: headers, body: jsonBody);
-
-      // Log the response
-      _logResponse(url, response.statusCode, response.headers, response.body);
-
-      if (response.statusCode == 200) {
-        final decodedMessage = jsonDecode(response.body);
-        return NetworkResponse(
-          isSuccess: true,
-          statusCode: response.statusCode,
-          responseData: decodedMessage,
-        );
-      } else {
-        return NetworkResponse(
-          isSuccess: false,
-          statusCode: response.statusCode,
-        );
-      }
-    } catch (e) {
-      _logResponse(url, -1, null, '', e.toString());
-      return NetworkResponse(
-        isSuccess: false,
-        statusCode: -1,
-        errorMessage: e.toString(),
-      );
-    }
-  }
-
 
   void _logRequest(String url,
       [Map<String, dynamic>? headers, Map<String, dynamic>? body]) {

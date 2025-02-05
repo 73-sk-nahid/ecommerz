@@ -1,4 +1,5 @@
 import 'package:ecommerz/features/auth/ui/controllers/email_verify_controller.dart';
+import 'package:ecommerz/features/auth/ui/controllers/otp_verify_controller.dart';
 import 'package:ecommerz/features/auth/ui/controllers/signup_user_controller.dart';
 import 'package:ecommerz/features/common/ui/controllers/main_bottom_nav_controller.dart';
 import 'package:ecommerz/serivces/network_caller/network_caller.dart';
@@ -11,5 +12,11 @@ class ControllerBinder extends Bindings {
     Get.put(NetworkCaller());
     Get.put(EmailVerifyController());
     Get.put(SignupUserController());
+    Get.put(OTPVerifyController());
+    Get.put(AuthController());
   }
+}
+
+class AuthController extends GetxController{
+  String? email;
 }

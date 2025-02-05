@@ -16,14 +16,15 @@ class UserModel {
   });
 
   // Convert object to JSON for API request
-  Map<String, String> toJson() {
+  Map<String, dynamic> toJson() {  // ✅ Correct type
     return {
       "first_name": firstName,
       "last_name": lastName,
       "email": email,
       "password": password,
-      "phone": phone,
+      "phone": phone,  // Let Dart handle the correct type
       "city": city,
     };
   }
+
 }

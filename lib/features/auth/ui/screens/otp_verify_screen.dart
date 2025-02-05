@@ -2,10 +2,16 @@ import 'dart:async';
 
 import 'package:ecommerz/app/app_colors.dart';
 import 'package:ecommerz/app/app_constants.dart';
+import 'package:ecommerz/app/controller_binder.dart';
+import 'package:ecommerz/features/auth/ui/controllers/otp_verify_controller.dart';
 import 'package:ecommerz/features/auth/ui/screens/complete_profile_screen.dart';
 import 'package:ecommerz/features/auth/ui/widgets/app_logo_widget.dart';
+import 'package:ecommerz/features/common/ui/screens/main_bottom_nav_screen.dart';
+import 'package:ecommerz/features/common/ui/widgets/centered_circular_progress_indicator.dart';
+import 'package:ecommerz/features/common/ui/widgets/snackbar_message.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:get/get.dart';
 
 class OTPVerifyScreen extends StatefulWidget {
   const OTPVerifyScreen({super.key});
@@ -18,6 +24,7 @@ class OTPVerifyScreen extends StatefulWidget {
 
 class _OTPVerifyScreenState extends State<OTPVerifyScreen> {
   final TextEditingController _otpTEController = TextEditingController();
+  final OTPVerifyController _otpVerifyController = Get.find<OTPVerifyController>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late int secondsRemaining;
@@ -27,11 +34,11 @@ class _OTPVerifyScreenState extends State<OTPVerifyScreen> {
   @override
   void initState() {
     // TODO: implement initState
-      super.initState();
-      _startResendCodeTimer();
+    super.initState();
+    _startResendCodeTimer();
   }
 
-  void _startResendCodeTimer(){
+  void _startResendCodeTimer() {
     secondsRemaining = AppConstants.resendOTPTimeoutInSec;
     timer = Timer.periodic(const Duration(seconds: 1), (_) {
       setState(() {
@@ -44,7 +51,6 @@ class _OTPVerifyScreenState extends State<OTPVerifyScreen> {
       });
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +87,7 @@ class _OTPVerifyScreenState extends State<OTPVerifyScreen> {
                 const SizedBox(
                   height: 8,
                 ),
-                Text('A 6 Digit OTP Code has been Sent',
+                Text('A 4 Digit OTP Code has been Sent',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: Colors.grey,
                         )),
@@ -89,7 +95,7 @@ class _OTPVerifyScreenState extends State<OTPVerifyScreen> {
                   height: 8,
                 ),
                 PinCodeTextField(
-                  length: 6,
+                  length: 4,
                   obscureText: false,
                   animationType: AnimationType.fade,
                   animationDuration: const Duration(milliseconds: 300),
@@ -106,13 +112,14 @@ class _OTPVerifyScreenState extends State<OTPVerifyScreen> {
                 const SizedBox(
                   height: 24,
                 ),
-                ElevatedButton(
-                    onPressed: () {
-                      // if(_formKey.currentState!.validate()){}
-                      //Navigator.pushNamedAndRemoveUntil(context, CompleteProfileScreen.name);
-                      Navigator.pushNamed(context, CompleteProfileScreen.name);
-                    },
-                    child: const Text("Next")),
+                GetBuilder<OTPVerifyController>(builder: (controller) {
+                  if (controller.inProgress) {
+                    return CenteredCircularProgressIndicator();
+                  }
+                  return ElevatedButton(
+                      onPressed: _onTapNextButton,
+                      child: const Text("Next"));
+                }),
                 const SizedBox(
                   height: 24,
                 ),
@@ -133,8 +140,7 @@ class _OTPVerifyScreenState extends State<OTPVerifyScreen> {
                       )
                     ])),
                 TextButton(
-                  onPressed:
-                    enableResend ? _resendCode : null,
+                  onPressed: enableResend ? _resendCode : null,
                   child: const Text(
                     "Resend Code",
                   ),
@@ -146,7 +152,8 @@ class _OTPVerifyScreenState extends State<OTPVerifyScreen> {
       ),
     );
   }
-  void _resendCode(){
+
+  void _resendCode() {
     setState(() {
       secondsRemaining = AppConstants.resendOTPTimeoutInSec;
       enableResend = false;
@@ -158,5 +165,26 @@ class _OTPVerifyScreenState extends State<OTPVerifyScreen> {
     // TODO: implement dispose
     timer.cancel();
     super.dispose();
+  }
+
+  void _onTapNextButton() async {
+    if (_formKey.currentState!.validate()) {
+      Map<String, dynamic> userOTP() {
+        return{
+          "email" : Get.find<AuthController>().email!,
+          "otp" : _otpTEController.text.trim()
+        };
+      }
+      bool isSuccess = await _otpVerifyController.verifyOTP(userOTP());
+      if (isSuccess) {
+        if (mounted) {
+          Navigator.pushNamed(context, MainBottomNavScreen.name);
+        }
+      } else {
+        if (mounted) {
+          showSnackBarMessage(context, _otpVerifyController.errorMessage!);
+        }
+      }
+    }
   }
 }

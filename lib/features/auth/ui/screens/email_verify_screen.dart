@@ -1,10 +1,15 @@
+import 'dart:convert';
+
+import 'package:ecommerz/app/urls.dart';
 import 'package:ecommerz/features/auth/ui/controllers/email_verify_controller.dart';
 import 'package:ecommerz/features/auth/ui/screens/otp_verify_screen.dart';
 import 'package:ecommerz/features/auth/ui/widgets/app_logo_widget.dart';
+import 'package:ecommerz/features/common/ui/screens/main_bottom_nav_screen.dart';
 import 'package:ecommerz/features/common/ui/widgets/centered_circular_progress_indicator.dart';
 import 'package:ecommerz/features/common/ui/widgets/snackbar_message.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 
 class EmailVerifyScreen extends StatefulWidget {
   const EmailVerifyScreen({super.key});
@@ -101,6 +106,24 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
       ),
     );
   }
+  
+  // void _onTapNextButton() async {
+  //   const apiUrl = "https://ecom-rs8e.onrender.com/api/auth/verify-otp";
+  //   if(_formKey.currentState!.validate()) {
+  //       var response = await post(
+  //            apiUrl as Uri,
+  //           body: jsonEncode({
+  //             "email" : _emailTEController.text.trim(),
+  //             "otp" : "1234"}));
+  //       if(response.statusCode == 201) {
+  //         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Done")));
+  //         Navigator.pushNamed(context, MainBottomNavScreen.name);
+  //       }
+  //       else{
+  //         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Failed")));
+  //       }
+  //   }
+  // }
 
   void _onTapNextButton() async {
     if (_formKey.currentState!.validate()) {

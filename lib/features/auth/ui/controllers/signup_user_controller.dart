@@ -14,7 +14,7 @@ class SignupUserController extends GetxController {
     _inProgress = true;
     update();
     final NetworkResponse response =
-    await Get.find<NetworkCaller>().postRequestUsingModel(Urls.userSignUp, body: user.toJson());
+    await Get.find<NetworkCaller>().postRequest(Urls.userSignUp, body: user.toJson());
     if (response.isSuccess) {
       _errorMessage = null;
       isSuccess = true;

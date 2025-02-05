@@ -1,8 +1,8 @@
+import 'package:ecommerz/app/controller_binder.dart';
 import 'package:ecommerz/features/auth/ui/controllers/signup_user_controller.dart';
 import 'package:ecommerz/features/auth/ui/models/user_model.dart';
 import 'package:ecommerz/features/auth/ui/screens/otp_verify_screen.dart';
 import 'package:ecommerz/features/auth/ui/widgets/app_logo_widget.dart';
-import 'package:ecommerz/features/common/ui/screens/main_bottom_nav_screen.dart';
 import 'package:ecommerz/features/common/ui/widgets/centered_circular_progress_indicator.dart';
 import 'package:ecommerz/features/common/ui/widgets/snackbar_message.dart';
 import 'package:flutter/material.dart';
@@ -210,7 +210,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 ),
                 GetBuilder<SignupUserController>(builder: (controller) {
                   if (controller.inProgress) {
-                    return const CenteredCircularProgressIndicator();
+                    return CenteredCircularProgressIndicator();
                   }
                   return ElevatedButton(
                     // if(_formKey.currentState!.validate()){}
@@ -239,7 +239,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
       bool isSuccess = await _signupUserController.signUpUser(newUser);
       if (isSuccess) {
         if (mounted) {
-          Navigator.pushNamed(context, MainBottomNavScreen.name);
+          Navigator.pushNamed(context, OTPVerifyScreen.name);
+          Get.find<AuthController>().email = _emailTEController.text.trim();
         }
       } else {
         if (mounted) {
