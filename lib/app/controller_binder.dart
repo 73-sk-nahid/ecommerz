@@ -1,4 +1,5 @@
 import 'package:ecommerz/features/auth/ui/controllers/email_verify_controller.dart';
+import 'package:ecommerz/features/auth/ui/controllers/login_user_controller.dart';
 import 'package:ecommerz/features/auth/ui/controllers/otp_verify_controller.dart';
 import 'package:ecommerz/features/auth/ui/controllers/signup_user_controller.dart';
 import 'package:ecommerz/features/common/ui/controllers/main_bottom_nav_controller.dart';
@@ -14,6 +15,7 @@ class ControllerBinder extends Bindings {
     Get.put(SignupUserController());
     Get.put(OTPVerifyController());
     Get.put(AuthController());
+    Get.put(LoginUserController());
   }
 }
 

@@ -1,6 +1,6 @@
 import 'package:ecommerz/app/controller_binder.dart';
 import 'package:ecommerz/features/auth/ui/controllers/signup_user_controller.dart';
-import 'package:ecommerz/features/auth/ui/models/user_model.dart';
+import 'package:ecommerz/features/auth/data/models/user_model.dart';
 import 'package:ecommerz/features/auth/ui/screens/otp_verify_screen.dart';
 import 'package:ecommerz/features/auth/ui/widgets/app_logo_widget.dart';
 import 'package:ecommerz/features/common/ui/widgets/centered_circular_progress_indicator.dart';
