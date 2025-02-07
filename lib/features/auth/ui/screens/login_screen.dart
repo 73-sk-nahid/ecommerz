@@ -27,81 +27,82 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AppLogoWidget(),
-              const SizedBox(
-                height: 16,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  SizedBox(height: 160,),
+                  AppLogoWidget(),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    controller: _emailTEController,
+                    decoration: const InputDecoration(
+                      hintText: 'E-mail Address',
+                    ),
+                    validator: (String? value) {
+                      if (value?.trim().isEmpty ?? true) {
+                        return 'Enter Email Address'; // Check if empty
+                      }
+                      if (!RegExp(Strings.emailRegex).hasMatch(value!)) {
+                        return 'Enter Valid Email Address'; // Validate Bangladesh mobile number format
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: !passwordVisible,
+                    controller: _passwordTEController,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    decoration: InputDecoration(
+                        hintText: 'Enter password',
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            passwordVisible ? Icons.visibility : Icons.visibility_off,
+                            color: AppColors.themeColor,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              passwordVisible = !passwordVisible;
+                            });
+                          },
+                        )),
+                    validator: (String? value) {
+                      if (value?.trim().isEmpty == true) {
+                        return 'Enter Password';
+                      }
+                      if (value!.trim().length < 6) {
+                        return 'Enter valid password';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  GetBuilder<LoginUserController>(builder: (controller) {
+                    if (controller.inProgress) {
+                      return CenteredCircularProgressIndicator();
+                    }
+                    return ElevatedButton(
+                    onPressed: _onTapNextButton,
+                    child: const Text('Log In'));
+                    }),
+                ],
               ),
-              TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                controller: _emailTEController,
-                decoration: const InputDecoration(
-                  hintText: 'E-mail Address',
-                ),
-                validator: (String? value) {
-                  if (value?.trim().isEmpty ?? true) {
-                    return 'Enter Email Address'; // Check if empty
-                  }
-                  if (!RegExp(Strings.emailRegex).hasMatch(value!)) {
-                    return 'Enter Valid Email Address'; // Validate Bangladesh mobile number format
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.visiblePassword,
-                obscureText: passwordVisible,
-                controller: _passwordTEController,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                decoration: InputDecoration(
-                    hintText: 'Enter password',
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        passwordVisible ? Icons.visibility_off : Icons.visibility,
-                        color: AppColors.themeColor,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          passwordVisible = !passwordVisible;
-                        });
-                      },
-                    )),
-                validator: (String? value) {
-                  if (value?.trim().isEmpty == true) {
-                    return 'Enter Password';
-                  }
-                  if (value!.trim().length < 6) {
-                    return 'Enter valid password';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              GetBuilder<LoginUserController>(builder: (controller) {
-                if (controller.inProgress) {
-                  return CenteredCircularProgressIndicator();
-                }
-                return ElevatedButton(
-                onPressed: _onTapNextButton,
-                child: const Text('Log In'));
-                }),
-            ],
+            ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 
   void _onTapNextButton() async {
