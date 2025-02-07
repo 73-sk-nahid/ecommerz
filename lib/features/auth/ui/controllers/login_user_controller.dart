@@ -19,6 +19,13 @@ class LoginUserController extends GetxController {
     final NetworkResponse response =
     await Get.find<NetworkCaller>().postRequest(Urls.userLogin, body: userInfo);
     if (response.isSuccess) {
+      final data = response.responseData['data'];
+      _user = UserModel.fromJson(data['user']);
+      print(_user?.firstName);
+      print(_user?.lastName);
+      print(_user?.email);
+      print(_user?.phone);
+      print(_user?.avatarUrl);
       _errorMessage = null;
       isSuccess = true;
     } else {
