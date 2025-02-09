@@ -62,6 +62,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 //First Name TextFormField
                 TextFormField(
                   keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (String? value) {
                     if (value?.trim().isEmpty ?? true) // check is it empty

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:ecommerz/app/app_colors.dart';
 import 'package:ecommerz/app/app_constants.dart';
 import 'package:ecommerz/app/controller_binder.dart';
