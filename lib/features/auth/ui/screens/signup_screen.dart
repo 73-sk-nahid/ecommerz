@@ -1,7 +1,9 @@
+import 'package:ecommerz/app/app_colors.dart';
 import 'package:ecommerz/app/app_constants.dart';
 import 'package:ecommerz/app/controller_binder.dart';
 import 'package:ecommerz/features/auth/ui/controllers/signup_user_controller.dart';
 import 'package:ecommerz/features/auth/data/models/user_model.dart';
+import 'package:ecommerz/features/auth/ui/screens/login_screen.dart';
 import 'package:ecommerz/features/auth/ui/screens/otp_verify_screen.dart';
 import 'package:ecommerz/features/auth/ui/widgets/app_logo_widget.dart';
 import 'package:ecommerz/features/common/ui/widgets/centered_circular_progress_indicator.dart';
@@ -9,16 +11,16 @@ import 'package:ecommerz/features/common/ui/widgets/snackbar_message.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CompleteProfileScreen extends StatefulWidget {
-  const CompleteProfileScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   static const String name = '/complete-profile';
 
   @override
-  State<CompleteProfileScreen> createState() => _CompleteProfileScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _firstNameTEController = TextEditingController();
   final TextEditingController _lastNameTEController = TextEditingController();
   final TextEditingController _emailTEController = TextEditingController();
@@ -41,13 +43,13 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
             child: Column(
               children: [
                 const SizedBox(
-                  height: 80,
+                  height: 64,
                 ),
                 const AppLogoWidget(),
                 const SizedBox(
-                  height: 24,
+                  height: 8,
                 ),
-                Text('Complete Profile',
+                Text('Sign Up Now',
                     style: Theme.of(context).textTheme.titleLarge),
                 const SizedBox(
                   height: 8,
@@ -201,7 +203,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 16,
                 ),
                 GetBuilder<SignupUserController>(builder: (controller) {
                   if (controller.inProgress) {
@@ -213,6 +215,23 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                       onPressed: _onTapNextButton,
                       child: const Text("Complete"));
                 }),
+                const SizedBox(
+                  height: 16,
+                ),
+                GestureDetector(
+                  onTap: _loginAccount,
+                  child: RichText(
+                    text: const TextSpan(
+                        text: 'Already have an account?  ',
+                        style: TextStyle(color: Colors.grey),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'Log in here',
+                            style: TextStyle(color: AppColors.themeColor),
+                          )
+                        ]),
+                  ),
+                ),
               ],
             ),
           ),
@@ -243,5 +262,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
         }
       }
     }
+  }
+
+  void _loginAccount() {
+    Navigator.pushNamed(context, LoginScreen.name);
   }
 }

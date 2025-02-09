@@ -1,6 +1,6 @@
 import 'package:ecommerz/app/app_theme_data.dart';
 import 'package:ecommerz/app/controller_binder.dart';
-import 'package:ecommerz/features/auth/ui/screens/complete_profile_screen.dart';
+import 'package:ecommerz/features/auth/ui/screens/signup_screen.dart';
 import 'package:ecommerz/features/auth/ui/screens/email_verify_screen.dart';
 import 'package:ecommerz/features/auth/ui/screens/login_screen.dart';
 import 'package:ecommerz/features/auth/ui/screens/otp_verify_screen.dart';
@@ -36,8 +36,8 @@ class CraftyBay extends StatelessWidget {
           widget = const EmailVerifyScreen();
         } else if (settings.name == OTPVerifyScreen.name) {
           widget = const OTPVerifyScreen();
-        } else if (settings.name == CompleteProfileScreen.name) {
-          widget = const CompleteProfileScreen();
+        } else if (settings.name == SignUpScreen.name) {
+          widget = const SignUpScreen();
         } else if (settings.name == HomeScreen.name) {
           widget = const HomeScreen();
         } else if (settings.name == MainBottomNavScreen.name) {
