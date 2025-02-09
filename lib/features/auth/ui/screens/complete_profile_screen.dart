@@ -1,3 +1,4 @@
+import 'package:ecommerz/app/app_constants.dart';
 import 'package:ecommerz/app/controller_binder.dart';
 import 'package:ecommerz/features/auth/ui/controllers/signup_user_controller.dart';
 import 'package:ecommerz/features/auth/data/models/user_model.dart';
@@ -104,14 +105,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                     if (value?.trim().isEmpty ?? true) {
                       return 'Enter Email Address'; // Check if empty
                     }
-                    if (!RegExp(
-                            r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
-                            r'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-'
-                            r'\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*'
-                            r'[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4]'
-                            r'[0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9]'
-                            r'[0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\'
-                            r'x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])')
+                    if (!RegExp(AppConstants.emailRegex)
                         .hasMatch(value!)) {
                       return 'Enter Valid Email Address'; // Validate Bangladesh mobile number format
                     }
@@ -130,7 +124,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (String? value) {
                     RegExp regex = RegExp(
-                        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+                        AppConstants.passwordRegex);
                     if (value?.trim().isEmpty ?? true) {
                       return 'Please enter password';
                     } else {
@@ -151,7 +145,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   keyboardType: TextInputType.phone,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (String? value) {
-                    RegExp regex = RegExp(r'^(?:(?:\+|00)88|01)?\d{11}');
+                    RegExp regex = RegExp(AppConstants.phoneNumberRegex);
                     if (value?.trim().isEmpty ?? true) // check is it empty
                     {
                       return 'Enter phone Number';

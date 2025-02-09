@@ -1,5 +1,5 @@
 import 'package:ecommerz/app/app_colors.dart';
-import 'package:ecommerz/app/const_strings.dart';
+import 'package:ecommerz/app/app_constants.dart';
 import 'package:ecommerz/features/auth/ui/controllers/login_user_controller.dart';
 import 'package:ecommerz/features/auth/ui/widgets/app_logo_widget.dart';
 import 'package:ecommerz/features/common/ui/screens/main_bottom_nav_screen.dart';
@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (value?.trim().isEmpty ?? true) {
                         return 'Enter Email Address'; // Check if empty
                       }
-                      if (!RegExp(Strings.emailRegex).hasMatch(value!)) {
+                      if (!RegExp(AppConstants.emailRegex).hasMatch(value!)) {
                         return 'Enter Valid Email Address'; // Validate Bangladesh mobile number format
                       }
                       return null;

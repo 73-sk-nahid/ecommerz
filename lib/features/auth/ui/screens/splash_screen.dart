@@ -1,5 +1,3 @@
-import 'package:ecommerz/features/auth/ui/screens/complete_profile_screen.dart';
-import 'package:ecommerz/features/auth/ui/screens/email_verify_screen.dart';
 import 'package:ecommerz/features/auth/ui/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
