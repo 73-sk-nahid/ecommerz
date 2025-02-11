@@ -5,4 +5,5 @@ class Urls{
   static String resendOTP = '$_baseURL/auth/resend-otp';
   static String userSignUp = '$_baseURL/auth/signup';
   static String userLogin = '$_baseURL/auth/login';
+  static String categoryList = '$_baseURL/categories';
 }
