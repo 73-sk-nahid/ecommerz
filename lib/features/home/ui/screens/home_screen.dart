@@ -1,5 +1,9 @@
 import 'package:ecommerz/app/assets_path.dart';
+import 'package:ecommerz/features/common/data/model/category_list_model.dart';
+import 'package:ecommerz/features/common/data/model/category_model.dart';
+import 'package:ecommerz/features/common/ui/controllers/category_list_controller.dart';
 import 'package:ecommerz/features/common/ui/controllers/main_bottom_nav_controller.dart';
+import 'package:ecommerz/features/common/ui/widgets/centered_circular_progress_indicator.dart';
 import 'package:ecommerz/features/home/ui/widgets/app_bar_icon_button.dart';
 import 'package:ecommerz/features/home/ui/widgets/home_carousel_slider.dart';
 import 'package:ecommerz/features/home/ui/widgets/product_search_bar.dart';
@@ -44,12 +48,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
                 _sizedBox8(),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: _getCategoryList(),
-                  ),
-                ),
+                GetBuilder<CategoryListController>(builder: (controller){
+                  if(controller.inProgress) {
+                    return const SizedBox(
+                      height: 100,
+                      child: CenteredCircularProgressIndicator(),
+                    );
+                  }
+                    return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: _getCategoryList(controller.categoryList),
+                      ),
+                    );
+                }),
+
                 _sizedBox8(),
                 HomeSectionHeader(
                   title: 'Popular',
@@ -95,23 +108,38 @@ class _HomeScreenState extends State<HomeScreen> {
 
   SizedBox _sizedBox8() {
     return const SizedBox(
-                height: 8,
-              );
+      height: 8,
+    );
   }
 
   SizedBox _sizedBox16() {
     return const SizedBox(
-                height: 16,
-              );
+      height: 16,
+    );
   }
 
-  List<Widget> _getCategoryList() {
+  // List<Widget> _getCategoryList() {
+  //   List<Widget> categoryList = [];
+  //   for (int i = 0; i < 10; i++) {
+  //     categoryList.add(const Padding(
+  //       padding: EdgeInsets.only(right: 8.0),
+  //       child: CategoryItemWidget(),
+  //     ));
+  //   }
+  //   return categoryList;
+  // }
+
+  List<Widget> _getCategoryList(List<CategoryModel> categoryModels) {
     List<Widget> categoryList = [];
-    for (int i = 0; i < 10; i++) {
-      categoryList.add(const Padding(
-        padding: EdgeInsets.only(right: 8.0),
-        child: CategoryItemWidget(),
-      ));
+    for (int i = 0; i < categoryModels.length; i++) {
+      categoryList.add(
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: CategoryItemWidget(
+              categoryModel: categoryModels[i],
+            ),
+          ),
+      );
     }
     return categoryList;
   }
