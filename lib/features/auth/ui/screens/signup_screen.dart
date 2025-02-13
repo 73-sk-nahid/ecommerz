@@ -253,8 +253,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       bool isSuccess = await _signupUserController.signUpUser(newUser);
       if (isSuccess) {
         if (mounted) {
-          Navigator.pushNamed(context, OTPVerifyScreen.name);
-          Get.find<AuthController>().email = _emailTEController.text.trim();
+          Navigator.pushNamed(context, OTPVerifyScreen.name, arguments: _emailTEController.text.trim());
         }
       } else {
         if (mounted) {

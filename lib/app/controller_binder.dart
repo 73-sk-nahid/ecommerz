@@ -15,12 +15,7 @@ class ControllerBinder extends Bindings {
     Get.put(EmailVerifyController());
     Get.put(SignupUserController());
     Get.put(OTPVerifyController());
-    Get.put(AuthController());
     Get.put(LoginUserController());
     Get.put(CategoryListController());
   }
-}
-
-class AuthController extends GetxController{
-  String? email;
 }

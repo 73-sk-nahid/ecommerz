@@ -12,9 +12,10 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:get/get.dart';
 
 class OTPVerifyScreen extends StatefulWidget {
-  const OTPVerifyScreen({super.key});
+  const OTPVerifyScreen({super.key, required this.email});
 
   static const String name = '/otp-verify';
+  final String email;
 
   @override
   State<OTPVerifyScreen> createState() => _OTPVerifyScreenState();
@@ -157,7 +158,7 @@ class _OTPVerifyScreenState extends State<OTPVerifyScreen> {
     if (_formKey.currentState!.validate()) {
       Map<String, dynamic> userOTP() {
         return{
-          "email" : Get.find<AuthController>().email!,
+          "email" : widget.email,
           "otp" : _otpTEController.text.trim()
         };
       }

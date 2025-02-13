@@ -1,5 +1,4 @@
 import 'package:ecommerz/app/app_constants.dart';
-import 'package:ecommerz/app/controller_binder.dart';
 import 'package:ecommerz/features/auth/ui/controllers/email_verify_controller.dart';
 import 'package:ecommerz/features/auth/ui/screens/otp_verify_screen.dart';
 import 'package:ecommerz/features/auth/ui/widgets/app_logo_widget.dart';
@@ -99,8 +98,7 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
           .verifyEmail(body);
       if (isSuccess) {
         if (mounted) {
-          Get.find<AuthController>().email = _emailTEController.text.trim();
-          Navigator.pushNamed(context, OTPVerifyScreen.name);
+          Navigator.pushNamed(context, OTPVerifyScreen.name, arguments: _emailTEController.text.trim());
         }
       } else {
         if (mounted) {
