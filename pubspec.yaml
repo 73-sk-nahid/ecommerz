@@ -39,6 +39,7 @@ dev_dependencies:
   lorem_ipsum:
   http:
   logger:
+  shared_preferences:
 
 flutter:
 
