@@ -2,6 +2,7 @@ import 'package:ecommerz/features/auth/ui/controllers/email_verify_controller.da
 import 'package:ecommerz/features/auth/ui/controllers/login_user_controller.dart';
 import 'package:ecommerz/features/auth/ui/controllers/otp_verify_controller.dart';
 import 'package:ecommerz/features/auth/ui/controllers/signup_user_controller.dart';
+import 'package:ecommerz/features/common/ui/controllers/auth_controller.dart';
 import 'package:ecommerz/features/common/ui/controllers/category_list_controller.dart';
 import 'package:ecommerz/features/common/ui/controllers/main_bottom_nav_controller.dart';
 import 'package:ecommerz/serivces/network_caller/network_caller.dart';
@@ -17,5 +18,6 @@ class ControllerBinder extends Bindings {
     Get.put(OTPVerifyController());
     Get.put(LoginUserController());
     Get.put(CategoryListController());
+    Get.put(AuthController());
   }
 }

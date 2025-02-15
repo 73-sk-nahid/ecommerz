@@ -1,4 +1,6 @@
 import 'package:ecommerz/app/urls.dart';
+import 'package:ecommerz/features/auth/data/models/auth_success_model.dart';
+import 'package:ecommerz/features/common/ui/controllers/auth_controller.dart';
 import 'package:ecommerz/serivces/network_caller/network_caller.dart';
 import 'package:get/get.dart';
 
@@ -15,6 +17,8 @@ class OTPVerifyController extends GetxController {
     final NetworkResponse response =
         await Get.find<NetworkCaller>().postRequest(Urls.verifyEmailOTP, body: userOTP);
     if (response.isSuccess) {
+      AuthSuccessModel authSuccessModel = AuthSuccessModel.fromJson(response.responseData);
+      await Get.find<AuthController>().saveUserData(authSuccessModel.data!.token!, authSuccessModel.data!.user!);
       _errorMessage = null;
       isSuccess = true;
     } else {

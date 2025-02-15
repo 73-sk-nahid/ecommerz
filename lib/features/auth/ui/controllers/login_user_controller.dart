@@ -1,5 +1,7 @@
 import 'package:ecommerz/app/urls.dart';
+import 'package:ecommerz/features/auth/data/models/auth_success_model.dart';
 import 'package:ecommerz/features/auth/data/models/user_model.dart';
+import 'package:ecommerz/features/common/ui/controllers/auth_controller.dart';
 import 'package:ecommerz/serivces/network_caller/network_caller.dart';
 import 'package:get/get.dart';
 
@@ -26,6 +28,8 @@ class LoginUserController extends GetxController {
       print(_user?.email);
       print(_user?.phone);
       print(_user?.avatarUrl);
+      AuthSuccessModel authSuccessModel = AuthSuccessModel.fromJson(response.responseData);
+      await Get.find<AuthController>().saveUserData(authSuccessModel.data!.token!, authSuccessModel.data!.user!);
       _errorMessage = null;
       isSuccess = true;
     } else {
