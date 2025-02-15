@@ -1,14 +1,14 @@
 import 'package:ecommerz/features/home/data/models/slider_list_data_model.dart';
 
-class SliderPaginationResponse {
+class SliderPaginationModel {
   int? code;
   String? status;
   String? msg;
   SliderListDataModel? data;
 
-  SliderPaginationResponse({this.code, this.status, this.msg, this.data});
+  SliderPaginationModel({this.code, this.status, this.msg, this.data});
 
-  SliderPaginationResponse.fromJson(Map<String, dynamic> json) {
+  SliderPaginationModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     status = json['status'];
     msg = json['msg'];

@@ -5,6 +5,7 @@ import 'package:ecommerz/features/auth/ui/controllers/signup_user_controller.dar
 import 'package:ecommerz/features/common/ui/controllers/auth_controller.dart';
 import 'package:ecommerz/features/common/ui/controllers/category_list_controller.dart';
 import 'package:ecommerz/features/common/ui/controllers/main_bottom_nav_controller.dart';
+import 'package:ecommerz/features/home/ui/controller/slider_list_controller.dart';
 import 'package:ecommerz/serivces/network_caller/network_caller.dart';
 import 'package:get/get.dart';
 
@@ -19,5 +20,6 @@ class ControllerBinder extends Bindings {
     Get.put(LoginUserController());
     Get.put(CategoryListController());
     Get.put(AuthController());
+    Get.put(SliderListController());
   }
 }

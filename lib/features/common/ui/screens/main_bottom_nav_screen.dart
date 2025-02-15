@@ -1,6 +1,7 @@
 import 'package:ecommerz/features/cart/ui/screens/cart_list_screen.dart';
 import 'package:ecommerz/features/category/ui/screens/category_list_screen.dart';
 import 'package:ecommerz/features/common/ui/controllers/main_bottom_nav_controller.dart';
+import 'package:ecommerz/features/home/ui/controller/slider_list_controller.dart';
 import 'package:ecommerz/features/home/ui/screens/home_screen.dart';
 import 'package:ecommerz/features/wishlist/ui/screens/wish_list_screen.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,13 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
     CartListScreen(),
     WishListScreen()
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Get.find<SliderListController>().getSliders();
+  }
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MainBottomNavController>(builder: (bottomNavController) {

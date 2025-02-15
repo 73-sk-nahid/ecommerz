@@ -1,11 +1,12 @@
 import 'package:ecommerz/app/app_colors.dart';
+import 'package:ecommerz/features/home/data/models/slider_model.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class HomeCarouselSlider extends StatefulWidget {
-  const HomeCarouselSlider({
-    super.key,
-  });
+  const HomeCarouselSlider({super.key, required this.sliderList});
+
+  final List<SliderModel> sliderList;
 
   @override
   State<HomeCarouselSlider> createState() => _HomeCarouselSliderState();
@@ -25,21 +26,41 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
               onPageChanged: (currentIndex, reason) {
                 _selectedIndex.value = currentIndex;
               }),
-          items: [1, 2, 3, 4, 5].map((i) {
+          items: widget.sliderList.map((slider) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.symmetric(horizontal: 2),
-                    decoration: BoxDecoration(
-                      color: AppColors.themeColor,
-                      borderRadius: BorderRadius.circular(8),
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.symmetric(horizontal: 2),
+                  decoration: BoxDecoration(
+                    color: AppColors.themeColor,
+                    borderRadius: BorderRadius.circular(8),
+                    image: DecorationImage(
+                      image: NetworkImage(slider.photoUrl ?? ''),
+                      fit: BoxFit.cover
                     ),
-                    child: Center(
-                        child: Text(
-                      'text $i',
-                      style: const TextStyle(fontSize: 16.0),
-                    )));
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          slider.description ?? '',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              fontSize: 16.0, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          width: 90,
+                          child: ElevatedButton(
+                              onPressed: () {}, child: const Text('Buy Now')),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
               },
             );
           }).toList(),
@@ -53,7 +74,7 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  for (int i = 0; i < 5; i++)
+                  for (int i = 0; i < widget.sliderList.length; i++)
                     Container(
                       width: 16,
                       height: 16,
