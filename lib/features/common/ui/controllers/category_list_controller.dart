@@ -9,7 +9,7 @@ class CategoryListController extends GetxController{
   bool _inProgress = false;
   bool get inProgress => _inProgress;
   CategoryListModel? _categoryListModel;
-  List<CategoryModel> get categoryList => _categoryListModel?.categoryList ?? [];
+  //List<CategoryModel> get categoryList => _categoryListModel?.categoryList ?? [];
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 

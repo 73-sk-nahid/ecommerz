@@ -1,4 +1,3 @@
-
 class SliderModel {
   String? sId;
   String? photoUrl;
