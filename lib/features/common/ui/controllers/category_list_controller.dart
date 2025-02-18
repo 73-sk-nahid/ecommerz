@@ -30,5 +30,5 @@ class CategoryListController extends GetxController{
     update();
     return isSuccess;
   }
-
+ // some problem with the category list
 }
