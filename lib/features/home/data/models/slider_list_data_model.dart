@@ -1,6 +1,6 @@
 import 'package:ecommerz/features/home/data/models/slider_model.dart';
 
-class SliderListDataModel {
+class PaginationModel {
   List<SliderModel>? results;
   int? total;
   int? firstPage;
@@ -8,7 +8,7 @@ class SliderListDataModel {
   int? next;
   int? lastPage;
 
-  SliderListDataModel(
+  PaginationModel(
       {this.results,
         this.total,
         this.firstPage,
@@ -16,7 +16,7 @@ class SliderListDataModel {
         this.next,
         this.lastPage});
 
-  SliderListDataModel.fromJson(Map<String, dynamic> json) {
+  PaginationModel.fromJson(Map<String, dynamic> json) {
     if (json['results'] != null) {
       results = <SliderModel>[];
       json['results'].forEach((v) {

@@ -4,7 +4,7 @@ class SliderPaginationModel {
   int? code;
   String? status;
   String? msg;
-  SliderListDataModel? data;
+  PaginationModel? data;
 
   SliderPaginationModel({this.code, this.status, this.msg, this.data});
 
@@ -12,7 +12,7 @@ class SliderPaginationModel {
     code = json['code'];
     status = json['status'];
     msg = json['msg'];
-    data = json['data'] != null ? SliderListDataModel.fromJson(json['data']) : null;
+    data = json['data'] != null ? PaginationModel.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
