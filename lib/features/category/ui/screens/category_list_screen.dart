@@ -44,11 +44,13 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
             icon: const Icon(Icons.arrow_back_ios),
           ),
         ),
-        body: RefreshIndicator(onRefresh: () async {
+        body: RefreshIndicator(
+          onRefresh: () async {
           Get.find<CategoryListController>().refreshCategoryList();
-        }, child: GetBuilder<CategoryListController>(
+        },
+          child: GetBuilder<CategoryListController>(
           builder: (controller) {
-            if (controller.inProgress) {
+            if (controller.initialInProgress) {
               return const CenteredCircularProgressIndicator();
             }
             return Column(

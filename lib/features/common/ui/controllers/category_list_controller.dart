@@ -49,5 +49,4 @@ class CategoryListController extends GetxController{
     _categoryList.clear();
     return getCategoryList();
   }
- // some problem with the category list
 }
