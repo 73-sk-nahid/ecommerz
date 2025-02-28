@@ -17,8 +17,19 @@ class NetworkResponse {
 
 class NetworkCaller {
   final Logger _logger = Logger();
-  Future<NetworkResponse> getRequest(String url) async {
+  Future<NetworkResponse> getRequest(String url, {Map<String, dynamic>? queryParams, String? accessToken}) async {
     try {
+      Map<String, String> headers = {
+        'content-type' : 'Application/json',
+      };
+      if(accessToken != null) {
+        headers['token'] = accessToken;
+      }
+      if(queryParams != null) {
+        for (String param in queryParams.keys ?? []) {
+          url += '$param=${queryParams[param]}&';
+        }
+      }
       Uri uri = Uri.parse(url);
       _logRequest(url);
       Response response = await get(uri);

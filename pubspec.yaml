@@ -34,7 +34,7 @@ dev_dependencies:
   flutter_lints: ^4.0.0
   flutter_svg:
   pin_code_fields:
-  get:
+  get: ^4.7.2
   carousel_slider:
   lorem_ipsum:
   http:
