@@ -1,12 +1,14 @@
 import 'package:ecommerz/features/product/ui/screens/product_details_screen.dart';
+import 'package:ecommerz/features/wishlist/data/model/wish_list_product_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
 
 class WishListItemWidget extends StatelessWidget {
   const WishListItemWidget({
-    super.key,
+    super.key, required this.productModel
   });
+  final WishListProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +28,13 @@ class WishListItemWidget extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                    color: AppColors.themeColor.withOpacity(0.08),
+                    color: AppColors.themeColor.withValues(alpha: 0.08),
                     borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(16),
                         topRight: Radius.circular(16))),
-                child: Image.asset(
-                  'assets/images/nike_shoe.png',
+                child: Image.network(
+                  productModel.photos?.isNotEmpty == true ? productModel.photos!.first :
+                  'https://pngimg.com/d/free_PNG90740.png',
                   width: 140,
                   height: 80,
                 ),
@@ -41,7 +44,7 @@ class WishListItemWidget extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      'Nike Shoe latest edition - RF45GH',
+                      productModel.title ?? "",
                       maxLines: 1,
                       style: TextStyle(
                         overflow: TextOverflow.ellipsis,
@@ -57,8 +60,8 @@ class WishListItemWidget extends StatelessWidget {
                       MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '\$100',
-                          style: TextStyle(
+                          '\$${(productModel.currentPrice ?? 0).toString()}',
+                          style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             color: AppColors.themeColor,
                           ),

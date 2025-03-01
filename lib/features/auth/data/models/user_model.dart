@@ -1,42 +1,55 @@
 class UserModel {
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String? password;
-  final String phone;
-  final String city;
-  final String? avatarUrl;
+  String? sId;
+  String? firstName;
+  String? lastName;
+  String? email;
+  bool? emailVerified;
+  String? phone;
+  bool? phoneVerified;
+  String? avatarUrl;
+  String? city;
+  String? password;
+  int? role;
 
   UserModel(
-      {required this.firstName,
-      required this.lastName,
-      required this.email,
-      this.password,
-      required this.phone,
-      required this.city,
-      this.avatarUrl});
+      {this.sId,
+        this.firstName,
+        this.lastName,
+        this.email,
+        this.emailVerified,
+        this.phone,
+        this.phoneVerified,
+        this.avatarUrl,
+        this.city,
+        this.password,
+        this.role});
 
-  // Convert object to JSON for API request
-  Map<String, dynamic> toJson() {
-    // ✅ Correct type
-    return {
-      "first_name": firstName,
-      "last_name": lastName,
-      "email": email,
-      "password": password,
-      "phone": phone, // Let Dart handle the correct type
-      "city": city,
-      "avatar_url": avatarUrl
-    };
+  UserModel.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
+    firstName = json['first_name'];
+    lastName = json['last_name'];
+    email = json['email'];
+    emailVerified = json['email_verified'];
+    phone = json['phone'];
+    phoneVerified = json['phone_verified'];
+    avatarUrl = json['avatar_url'];
+    city = json['city'];
+    role = json['role'];
   }
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
-        firstName: json['first_name'],
-        lastName: json['last_name'],
-        email: json['email'],
-        phone: json['phone'],
-        city: json['city'],
-        avatarUrl: json['avatar_url']);
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['first_name'] = firstName;
+    data['last_name'] = lastName;
+    data['email'] = email;
+    data['email_verified'] = emailVerified;
+    data['phone'] = phone;
+    data['phone_verified'] = phoneVerified;
+    data['avatar_url'] = avatarUrl;
+    data['city'] = city;
+    data['password'] = password;
+    data['role'] = role;
+    return data;
   }
 }

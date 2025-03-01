@@ -1,6 +1,5 @@
 import 'package:ecommerz/app/app_colors.dart';
 import 'package:ecommerz/app/app_constants.dart';
-import 'package:ecommerz/app/controller_binder.dart';
 import 'package:ecommerz/features/auth/ui/controllers/signup_user_controller.dart';
 import 'package:ecommerz/features/auth/data/models/user_model.dart';
 import 'package:ecommerz/features/auth/ui/screens/login_screen.dart';

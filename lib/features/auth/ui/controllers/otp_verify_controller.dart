@@ -18,7 +18,7 @@ class OTPVerifyController extends GetxController {
         await Get.find<NetworkCaller>().postRequest(Urls.verifyEmailOTP, body: userOTP);
     if (response.isSuccess) {
       AuthSuccessModel authSuccessModel = AuthSuccessModel.fromJson(response.responseData);
-      await Get.find<AuthController>().saveUserData(authSuccessModel.data!.token!, authSuccessModel.data!.user!);
+      await Get.find<AuthController>().saveUserData(authSuccessModel.data!.token!);
       _errorMessage = null;
       isSuccess = true;
     } else {

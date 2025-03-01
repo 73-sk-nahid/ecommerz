@@ -1,28 +1,27 @@
 import 'dart:convert';
-
+import 'package:ecommerz/features/auth/data/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ecommerz/features/auth/data/models/auth_success_model.dart';
 
 class AuthController {
   final String _accessTokenKey = 'access-token';
   final String _profileDataKey = 'access-token';
 
   String? accessToken;
-  User? profileModel;
+  UserModel? profileModel;
 
-  Future<void> saveUserData(String accessToken, User userModel) async{
+  Future<void> saveUserData(String accessToken) async{
+    print(accessToken);
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.setString(_accessTokenKey, accessToken);
-    await sharedPreferences.setString(_profileDataKey, jsonEncode(userModel.toJson()));
-    profileModel = userModel;
   }
 
-  Future<void> getUserData() async {
+  Future<String?> getUserData() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     accessToken = sharedPreferences.getString(_accessTokenKey);
-    profileModel = User.fromJson(
-      jsonDecode(sharedPreferences.getString(_profileDataKey)!),
-    );
+    // profileModel = UserModel.fromJson(
+    //   jsonDecode(sharedPreferences.getString(_profileDataKey)!),
+    // );
+    return accessToken;
   }
 
   Future<bool> isUserLoggedIn() async {

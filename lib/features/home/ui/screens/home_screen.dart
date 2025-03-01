@@ -1,4 +1,5 @@
 import 'package:ecommerz/app/assets_path.dart';
+import 'package:ecommerz/features/common/data/model/category/category_item_model.dart';
 import 'package:ecommerz/features/common/data/model/category/category_pagination_model.dart';
 import 'package:ecommerz/features/common/ui/controllers/category_list_controller.dart';
 import 'package:ecommerz/features/common/ui/controllers/main_bottom_nav_controller.dart';

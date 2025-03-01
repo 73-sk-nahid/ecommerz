@@ -45,19 +45,19 @@ class PaginationData {
     lastPage = json['last_page'];
   }
 }
-
-class Categories {
-  String? sId;
-  String? title;
-  String? slug;
-  String? icon;
-
-  Categories({this.sId, this.title, this.slug, this.icon});
-
-  Categories.fromJson(Map<String, dynamic> json) {
-    sId = json['_id'];
-    title = json['title'];
-    slug = json['slug'];
-    icon = json['icon'];
-  }
-}
+//
+// class Categories {
+//   String? sId;
+//   String? title;
+//   String? slug;
+//   String? icon;
+//
+//   Categories({this.sId, this.title, this.slug, this.icon});
+//
+//   Categories.fromJson(Map<String, dynamic> json) {
+//     sId = json['_id'];
+//     title = json['title'];
+//     slug = json['slug'];
+//     icon = json['icon'];
+//   }
+// }

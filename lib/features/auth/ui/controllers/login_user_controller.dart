@@ -11,8 +11,8 @@ class LoginUserController extends GetxController {
   bool get inProgress => _inProgress;
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
-  UserModel? _user;
-  UserModel? get user => _user;
+  final List<UserModel> _userData = [];
+  List<UserModel> get userData => _userData;
 
   Future<bool> logInUser(Map<String, dynamic> userInfo) async {
     bool isSuccess = false;
@@ -21,15 +21,11 @@ class LoginUserController extends GetxController {
     final NetworkResponse response =
     await Get.find<NetworkCaller>().postRequest(Urls.userLogin, body: userInfo);
     if (response.isSuccess) {
-      final data = response.responseData['data'];
-      _user = UserModel.fromJson(data['user']);
-      print(_user?.firstName);
-      print(_user?.lastName);
-      print(_user?.email);
-      print(_user?.phone);
-      print(_user?.avatarUrl);
+      //final data = response.responseData['data'];
+      //_user = UserModel.fromJson(data['user']);
       AuthSuccessModel authSuccessModel = AuthSuccessModel.fromJson(response.responseData);
-      await Get.find<AuthController>().saveUserData(authSuccessModel.data!.token!, authSuccessModel.data!.user!);
+      //_userData.addAll(authSuccessModel.data?.user ?? []);
+      await Get.find<AuthController>().saveUserData(authSuccessModel.data!.token!);
       _errorMessage = null;
       isSuccess = true;
     } else {

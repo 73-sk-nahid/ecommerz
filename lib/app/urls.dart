@@ -7,4 +7,6 @@ class Urls{
   static String userLogin = '$_baseURL/auth/login';
   static String categoryList = '$_baseURL/categories?';
   static String slidesURL = '$_baseURL/slides';
+  static String productsUrl = '$_baseURL/products?';
+  static String wishListUrl = '$_baseURL/wishlist?';
 }

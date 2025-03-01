@@ -2,7 +2,7 @@ class AuthSuccessModel {
   int? code;
   String? status;
   String? msg;
-  Data? data;
+  UserData? data;
 
   AuthSuccessModel({this.code, this.status, this.msg, this.data});
 
@@ -10,14 +10,14 @@ class AuthSuccessModel {
     code = json['code'];
     status = json['status'];
     msg = json['msg'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? UserData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['code'] = this.code;
-    data['status'] = this.status;
-    data['msg'] = this.msg;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['code'] = code;
+    data['status'] = status;
+    data['msg'] = msg;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -25,28 +25,28 @@ class AuthSuccessModel {
   }
 }
 
-class Data {
+class UserData {
   String? token;
-  User? user;
+  UserDataModel? user;
 
-  Data({this.token, this.user});
+  UserData({this.token, this.user});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  UserData.fromJson(Map<String, dynamic> json) {
     token = json['token'];
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? UserDataModel.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['token'] = this.token;
-    if (this.user != null) {
-      data['user'] = this.user!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['token'] = token;
+    if (user != null) {
+      data['user'] = user!.toJson();
     }
     return data;
   }
 }
 
-class User {
+class UserDataModel {
   String? sId;
   String? firstName;
   String? lastName;
@@ -54,11 +54,11 @@ class User {
   bool? emailVerified;
   String? phone;
   bool? phoneVerified;
-  Null? avatarUrl;
+  String? avatarUrl;
   String? city;
   int? role;
 
-  User(
+  UserDataModel(
       {this.sId,
         this.firstName,
         this.lastName,
@@ -70,7 +70,7 @@ class User {
         this.city,
         this.role});
 
-  User.fromJson(Map<String, dynamic> json) {
+  UserDataModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     firstName = json['first_name'];
     lastName = json['last_name'];
@@ -84,17 +84,17 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['first_name'] = this.firstName;
-    data['last_name'] = this.lastName;
-    data['email'] = this.email;
-    data['email_verified'] = this.emailVerified;
-    data['phone'] = this.phone;
-    data['phone_verified'] = this.phoneVerified;
-    data['avatar_url'] = this.avatarUrl;
-    data['city'] = this.city;
-    data['role'] = this.role;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['first_name'] = firstName;
+    data['last_name'] = lastName;
+    data['email'] = email;
+    data['email_verified'] = emailVerified;
+    data['phone'] = phone;
+    data['phone_verified'] = phoneVerified;
+    data['avatar_url'] = avatarUrl;
+    data['city'] = city;
+    data['role'] = role;
     return data;
   }
 }

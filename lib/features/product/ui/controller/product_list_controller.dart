@@ -1,22 +1,23 @@
 import 'package:ecommerz/app/urls.dart';
-import 'package:ecommerz/features/common/data/model/category/category_item_model.dart';
-import 'package:ecommerz/features/common/data/model/category/category_pagination_model.dart';
+import 'package:ecommerz/features/common/ui/controllers/auth_controller.dart';
+import 'package:ecommerz/features/product/data/model/product_model.dart';
+import 'package:ecommerz/features/product/data/model/product_pagination_model.dart';
 import 'package:ecommerz/serivces/network_caller/network_caller.dart';
 import 'package:get/get.dart';
 
-class CategoryListController extends GetxController{
+class ProductListController extends GetxController{
   bool _inProgress = false;
   bool get inProgress => _inProgress;
   bool get initialInProgress => _page == 1 && inProgress;
-  final List<CategoryItemModel> _categoryList = [];
-  List<CategoryItemModel> get categoryList => _categoryList;
+  final List<ProductModel> _productList = [];
+  List<ProductModel> get productList => _productList;
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
   final int _count = 30;
   int _page = 0;
   int? _lastPage;
 
-  Future<bool> getCategoryList() async {
+  Future<bool> getProductList() async {
     _page++;
     if(_lastPage != null && _page > _lastPage!) return false;
     bool isSuccess = false;
@@ -27,11 +28,14 @@ class CategoryListController extends GetxController{
       'page' : _page
     };
 
+    String? accessToken = await Get.find<AuthController>().getUserData();
+    print(accessToken);
     final NetworkResponse response =
-    await Get.find<NetworkCaller>().getRequest(Urls.categoryList, queryParams: queryParams);
+    await Get.find<NetworkCaller>().getRequest(Urls.productsUrl, queryParams: queryParams, accessToken: accessToken);
     if (response.isSuccess) {
-      CategoryPaginationModel paginationModel = CategoryPaginationModel.fromJson(response.responseData);
-      _categoryList.addAll(paginationModel.data?.results ?? []);
+      print(response.responseData);
+      ProductsPaginationModel paginationModel = ProductsPaginationModel.fromJson(response.responseData);
+      _productList.addAll(paginationModel.data?.results ?? []);
       if(paginationModel.data?.lastPage != null) {
         _lastPage = paginationModel.data!.lastPage!;
       }
@@ -42,12 +46,5 @@ class CategoryListController extends GetxController{
     _inProgress = false;
     update();
     return isSuccess;
-  }
-
-  Future<bool> refreshCategoryList() async{
-    _page = 0;
-    _lastPage = null;
-    _categoryList.clear();
-    return getCategoryList();
   }
 }
