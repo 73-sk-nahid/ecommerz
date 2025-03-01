@@ -9,4 +9,5 @@ class Urls{
   static String slidesURL = '$_baseURL/slides';
   static String productsUrl = '$_baseURL/products?';
   static String wishListUrl = '$_baseURL/wishlist?';
+  static String cartListUrl = '$_baseURL/cart?';
 }

@@ -1,10 +1,13 @@
 import 'package:ecommerz/app/app_colors.dart';
 import 'package:ecommerz/app/assets_path.dart';
+import 'package:ecommerz/features/cart/data/model/cart_list_product_model.dart';
 import 'package:ecommerz/features/common/ui/widgets/prudct_quantity_inc_dec_button.dart';
 import 'package:flutter/material.dart';
 
 class CartProductItemWidget extends StatelessWidget {
-  const CartProductItemWidget({super.key});
+  const CartProductItemWidget({super.key, required this.cartProductModel});
+
+  final CartProductModel cartProductModel;
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +37,12 @@ class CartProductItemWidget extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                'Nike Shoe - AK45394 New Year Deal',
+                                cartProductModel.title ?? '',
                                 maxLines: 1,
                                 style: textTheme.bodyLarge
                                     ?.copyWith(overflow: TextOverflow.ellipsis),
                               ),
-                               Row(
+                              Row(
                                 children: [
                                   Text('Color: Red'),
                                   SizedBox(
@@ -52,7 +55,7 @@ class CartProductItemWidget extends StatelessWidget {
                           ),
                         ),
                         IconButton(
-                            onPressed: () {}, icon: Icon(Icons.delete_outlined)),
+                            onPressed: () {}, icon: const Icon(Icons.delete_outlined)),
                       ],
                     ),
                     const SizedBox(
@@ -62,8 +65,8 @@ class CartProductItemWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '\$100',
-                          style: TextStyle(
+                          '\$${(cartProductModel.currentPrice ?? 0).toString()}',
+                          style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
                               color: AppColors.themeColor),
