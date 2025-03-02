@@ -1,6 +1,5 @@
 import 'package:ecommerz/app/assets_path.dart';
 import 'package:ecommerz/features/common/data/model/category/category_item_model.dart';
-import 'package:ecommerz/features/common/data/model/category/category_pagination_model.dart';
 import 'package:ecommerz/features/common/ui/controllers/category_list_controller.dart';
 import 'package:ecommerz/features/common/ui/controllers/main_bottom_nav_controller.dart';
 import 'package:ecommerz/features/common/ui/widgets/centered_circular_progress_indicator.dart';
@@ -8,6 +7,8 @@ import 'package:ecommerz/features/home/ui/controller/slider_list_controller.dart
 import 'package:ecommerz/features/home/ui/widgets/app_bar_icon_button.dart';
 import 'package:ecommerz/features/home/ui/widgets/home_carousel_slider.dart';
 import 'package:ecommerz/features/home/ui/widgets/product_search_bar.dart';
+import 'package:ecommerz/features/product/data/model/product_model.dart';
+import 'package:ecommerz/features/product/ui/controller/product_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -29,10 +30,12 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchBarController = TextEditingController();
   final CategoryListController _categoryListController =
   Get.find<CategoryListController>();
+  final ProductListController _productListController = Get.find<ProductListController>();
 
   @override
   void initState() {
     _categoryListController.getCategoryList();
+    _productListController.getProductList();
     super.initState();
   }
 
@@ -86,14 +89,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 _sizedBox8(),
                 HomeSectionHeader(
                   title: 'Popular',
-                  onTap: () {},
+                  onTap: () {
+                  },
                 ),
                 _sizedBox8(),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: _getProductList(),
-                  ),
+                GetBuilder<ProductListController>(
+                  builder: (controller) {
+                    if(controller.inProgress){
+                      return const SizedBox(
+                        height: 100,
+                        child: CenteredCircularProgressIndicator(),
+                      );
+                    }
+                    return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: _getProductList(controller.productList),
+                      ),
+                    );
+                  }
                 ),
                 _sizedBox8(),
                 HomeSectionHeader(
@@ -101,11 +115,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {},
                 ),
                 _sizedBox8(),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: _getProductList(),
-                  ),
+                GetBuilder<ProductListController>(
+                    builder: (controller) {
+                      if(controller.inProgress){
+                        return const SizedBox(
+                          height: 100,
+                          child: CenteredCircularProgressIndicator(),
+                        );
+                      }
+                      return SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: _getProductList(controller.productList),
+                        ),
+                      );
+                    }
                 ),
                 _sizedBox8(),
                 HomeSectionHeader(
@@ -113,11 +137,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {},
                 ),
                 _sizedBox8(),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: _getProductList(),
-                  ),
+                GetBuilder<ProductListController>(
+                    builder: (controller) {
+                      if(controller.inProgress){
+                        return const SizedBox(
+                          height: 100,
+                          child: CenteredCircularProgressIndicator(),
+                        );
+                      }
+                      return SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: _getProductList(controller.productList),
+                        ),
+                      );
+                    }
                 ),
                 _sizedBox8(),
               ],
@@ -153,12 +187,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return categoryList;
   }
 
-  List<Widget> _getProductList() {
+  List<Widget> _getProductList(List<ProductModel> productModels) {
     List<Widget> productList = [];
-    for (int i = 0; i < 10; i++) {
-      productList.add(const Padding(
-        padding: EdgeInsets.only(right: 8.0),
-        child: ProductItemWidget(),
+    for (int i = 0; i < productModels.length; i++) {
+      productList.add( Padding(
+        padding: const EdgeInsets.only(right: 8.0),
+        child: ProductItemWidget(
+          productModel: productModels[i],
+        ),
       ));
     }
     return productList;

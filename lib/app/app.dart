@@ -5,6 +5,7 @@ import 'package:ecommerz/features/auth/ui/screens/email_verify_screen.dart';
 import 'package:ecommerz/features/auth/ui/screens/login_screen.dart';
 import 'package:ecommerz/features/auth/ui/screens/otp_verify_screen.dart';
 import 'package:ecommerz/features/auth/ui/screens/splash_screen.dart';
+import 'package:ecommerz/features/cart/ui/screens/cart_list_screen.dart';
 import 'package:ecommerz/features/category/ui/screens/category_list_screen.dart';
 import 'package:ecommerz/features/common/ui/screens/main_bottom_nav_screen.dart';
 import 'package:ecommerz/features/home/ui/screens/home_screen.dart';
@@ -41,17 +42,29 @@ class CraftyBay extends StatelessWidget {
           widget = const SignUpScreen();
         } else if (settings.name == HomeScreen.name) {
           widget = const HomeScreen();
+        } else if (settings.name == CartListScreen.name) {
+          widget = const CartListScreen();
         } else if (settings.name == MainBottomNavScreen.name) {
           widget = const MainBottomNavScreen();
         } else if (settings.name == CategoryListScreen.name) {
           widget = const CategoryListScreen();
         } else if (settings.name == ProductListScreen.name) {
-          String name = settings.arguments as String;
-          widget = ProductListScreen(categoryName: name);
+          Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
+          widget = ProductListScreen(
+            categoryName: args['categoryName'],
+            categoryId: args['categoryId'],
+          );
         } else if (settings.name == ProductDetailsScreen.name) {
-          int productId = settings.arguments as int;
-          widget = ProductDetailsScreen(productId: productId,);
+          String productId = settings.arguments as String;
+          widget = ProductDetailsScreen(productId: productId);
         }
+        // else if (settings.name == ProductListScreen.name) {
+        //   String name = settings.arguments as String;
+        //   widget = ProductListScreen(categoryName: name);
+        // } else if (settings.name == ProductDetailsScreen.name) {
+        //   int productId = settings.arguments as int;
+        //   widget = ProductDetailsScreen(productId: productId,);
+        // }
         else if (settings.name == ProductReviewScreen.name) {
           widget = const ProductReviewScreen();
         }

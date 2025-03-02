@@ -4,8 +4,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 class ProductImageCarouselSlider extends StatefulWidget {
   const ProductImageCarouselSlider({
-    super.key,
+    super.key, required this.imageUrls,
   });
+
+  final List<String> imageUrls;
 
   @override
   State<ProductImageCarouselSlider> createState() => _ProductImageCarouselSliderState();
@@ -25,20 +27,19 @@ class _ProductImageCarouselSliderState extends State<ProductImageCarouselSlider>
               onPageChanged: (currentIndex, reason) {
                 _selectedIndex.value = currentIndex;
               }),
-          items: [1, 2, 3, 4, 5].map((i) {
+          items: widget.imageUrls.map((url) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
                     width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.symmetric(horizontal: 2),
-                    decoration: const BoxDecoration(
+                    margin:  EdgeInsets.symmetric(horizontal: 2),
+                    decoration: BoxDecoration(
                       color: Colors.black12,
+                      image: DecorationImage(image: NetworkImage(url)),
+
                     ),
-                    child: Center(
-                        child: Text(
-                      'text $i',
-                      style: const TextStyle(fontSize: 16.0),
-                    )));
+                    alignment: Alignment.center,
+                    );
               },
             );
           }).toList(),
@@ -53,7 +54,7 @@ class _ProductImageCarouselSliderState extends State<ProductImageCarouselSlider>
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    for (int i = 0; i < 5; i++)
+                    for (int i = 0; i < widget.imageUrls.length; i++)
                       Container(
                         width: 16,
                         height: 16,

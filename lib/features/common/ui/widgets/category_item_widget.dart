@@ -1,5 +1,4 @@
 import 'package:ecommerz/features/common/data/model/category/category_item_model.dart';
-import 'package:ecommerz/features/common/data/model/category/category_pagination_model.dart';
 import 'package:ecommerz/features/product/ui/screens/product_list_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../../app/app_colors.dart';

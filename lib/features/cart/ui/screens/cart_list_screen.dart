@@ -10,6 +10,9 @@ import 'package:get/get.dart';
 class CartListScreen extends StatefulWidget {
   const CartListScreen({super.key});
 
+
+  static const String name = '/cart-list';
+
   @override
   State<CartListScreen> createState() => _CartListScreenState();
 }
@@ -46,7 +49,7 @@ class _CartListScreenState extends State<CartListScreen> {
         ),
         body: RefreshIndicator(
           onRefresh: () async{
-            Get.find<CartListController>().getCartList();
+            Get.find<CartListController>().refreshCartList();
           },
           child: GetBuilder<CartListController>(
             builder: (controller) {
@@ -107,7 +110,8 @@ class _CartListScreenState extends State<CartListScreen> {
           ),
           SizedBox(
             width: 120,
-            child: ElevatedButton(onPressed: () {}, child: Text('Checkout')),
+            child: ElevatedButton(onPressed: () {
+            }, child: const Text('Checkout')),
           ),
         ],
       ),

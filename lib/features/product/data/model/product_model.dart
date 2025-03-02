@@ -1,5 +1,4 @@
 import 'package:ecommerz/features/common/data/model/category/category_item_model.dart';
-import 'package:ecommerz/features/common/data/model/category/category_pagination_model.dart';
 
 class ProductModel {
   String? sId;
@@ -40,7 +39,8 @@ class ProductModel {
         this.inWishlist});
 
   ProductModel.fromJson(Map<String, dynamic> json) {
-    sId = json['_id'];
+    //sId = json['_id'];
+    sId = json['_id'] is Set ? (json['_id'] as Set).first : json['_id'].toString();
     title = json['title'];
     if (json['categories'] != null) {
       categories = <CategoryItemModel>[];

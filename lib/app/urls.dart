@@ -10,4 +10,7 @@ class Urls{
   static String productsUrl = '$_baseURL/products?';
   static String wishListUrl = '$_baseURL/wishlist?';
   static String cartListUrl = '$_baseURL/cart?';
+  static String toCartUrl = '$_baseURL/cart';
+  static String productDetailsUrl(String productId) => '$_baseURL/products/id/$productId';
+  static String reviewUrl = '$_baseURL/reviews?';
 }

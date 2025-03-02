@@ -1,3 +1,4 @@
+import 'package:ecommerz/features/product/data/model/product_model.dart';
 import 'package:ecommerz/features/product/ui/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -6,13 +7,17 @@ import '../../../../app/app_colors.dart';
 class ProductItemWidget extends StatelessWidget {
   const ProductItemWidget({
     super.key,
+    required this.productModel,
   });
+
+  final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.pushNamed(context, ProductDetailsScreen.name, arguments: 1);
+      onTap: () {
+        Navigator.pushNamed(context, ProductDetailsScreen.name,
+            arguments: productModel.sId ?? '');
       },
       child: SizedBox(
         width: 140,
@@ -30,10 +35,14 @@ class ProductItemWidget extends StatelessWidget {
                     borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(16),
                         topRight: Radius.circular(16))),
-                child: Image.asset(
-                  'assets/images/nike_shoe.png',
+                child: Image.network(
+                  (productModel.photos?.isNotEmpty == true
+                          ? productModel.photos!.first
+                          : "assets/images/nike_shoe.png")
+                      .trim(),
                   width: 140,
                   height: 80,
+                  fit: BoxFit.cover,
                 ),
               ),
               Padding(
@@ -41,9 +50,9 @@ class ProductItemWidget extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      'Nike Shoe latest edition - RF45GH',
+                      productModel.title ?? '',
                       maxLines: 1,
-                      style: TextStyle(
+                      style: const TextStyle(
                         overflow: TextOverflow.ellipsis,
                         fontWeight: FontWeight.w500,
                         color: Colors.black54,
@@ -53,12 +62,11 @@ class ProductItemWidget extends StatelessWidget {
                       height: 2,
                     ),
                     Row(
-                      mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '\$100',
-                          style: TextStyle(
+                          '\$${(productModel.currentPrice ?? 0).toString()}',
+                          style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             color: AppColors.themeColor,
                           ),

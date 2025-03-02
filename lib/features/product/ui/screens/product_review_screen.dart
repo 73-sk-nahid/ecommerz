@@ -3,8 +3,6 @@ import 'package:ecommerz/features/product/ui/screens/create_review_screen.dart';
 import 'package:ecommerz/features/product/ui/widgets/product_review_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../../common/ui/widgets/product_item_widget.dart';
-
 class ProductReviewScreen extends StatefulWidget {
   const ProductReviewScreen({super.key});
 
