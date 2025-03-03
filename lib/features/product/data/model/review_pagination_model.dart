@@ -70,7 +70,7 @@ class ReviewDataModel {
     product =
     json['product'] != null ? Product.fromJson(json['product']) : null;
     user = json['user'] != null ? User.fromJson(json['user']) : null;
-    rating = json['rating'];
+    rating = (json['rating'] as num?)?.toDouble();
     comment = json['comment'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
@@ -93,14 +93,6 @@ class Product {
     photos = json['photos'].cast<String>();
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['_id'] = sId;
-    data['title'] = title;
-    data['slug'] = slug;
-    data['photos'] = photos;
-    return data;
-  }
 }
 
 class User {
@@ -116,14 +108,5 @@ class User {
     firstName = json['first_name'];
     lastName = json['last_name'];
     avatarUrl = json['avatar_url'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['_id'] = sId;
-    data['first_name'] = firstName;
-    data['last_name'] = lastName;
-    data['avatar_url'] = avatarUrl;
-    return data;
   }
 }

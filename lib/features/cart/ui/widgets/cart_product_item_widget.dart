@@ -13,7 +13,7 @@ class CartProductItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       elevation: 1,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 16.0),

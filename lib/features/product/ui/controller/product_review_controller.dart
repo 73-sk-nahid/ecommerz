@@ -1,7 +1,5 @@
 import 'package:ecommerz/app/urls.dart';
 import 'package:ecommerz/features/common/ui/controllers/auth_controller.dart';
-import 'package:ecommerz/features/product/data/model/product_model.dart';
-import 'package:ecommerz/features/product/data/model/product_pagination_model.dart';
 import 'package:ecommerz/features/product/data/model/review_pagination_model.dart';
 import 'package:ecommerz/serivces/network_caller/network_caller.dart';
 import 'package:get/get.dart';
@@ -14,11 +12,11 @@ class ReviewListController extends GetxController{
   List<ReviewDataModel> get reviewList => _reviewList;
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
-  final int _count = 30;
+  final int _count = 10;
   int _page = 0;
   int? _lastPage;
 
-  Future<bool> getReviewList(int productId) async {
+  Future<bool> getReviewList(String productId) async {
     _page++;
     if(_lastPage != null && _page > _lastPage!) return false;
     bool isSuccess = false;
@@ -38,6 +36,11 @@ class ReviewListController extends GetxController{
       print(response.responseData);
       ProductReviewPaginationModel paginationModel = ProductReviewPaginationModel.fromJson(response.responseData);
       _reviewList.addAll(paginationModel.data?.results ?? []);
+      // final List<Product> productList = paginationModel.data?.results
+      //     ?.map((reviewListItem) => reviewListItem.product!)
+      //     .whereType<Product>()
+      //     .toList() ?? [];
+
       if(paginationModel.data?.lastPage != null) {
         _lastPage = paginationModel.data!.lastPage!;
       }
@@ -48,5 +51,12 @@ class ReviewListController extends GetxController{
     _inProgress = false;
     update();
     return isSuccess;
+  }
+
+  Future<bool> refreshReviewList(String productId) async{
+    _page = 0;
+    _lastPage = null;
+    _reviewList.clear();
+    return getReviewList(productId);
   }
 }

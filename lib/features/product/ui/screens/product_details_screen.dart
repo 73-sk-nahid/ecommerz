@@ -101,7 +101,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         ),
                                         TextButton(
                                             onPressed: () {
-                                              Navigator.pushNamed(context, ProductReviewScreen.name, arguments: productDetails.sId);
+                                              Navigator.pushNamed(context, ProductReviewScreen.name, arguments: widget.productId);
                                             },
                                             child: const Text('Reviews')),
                                         Container(
