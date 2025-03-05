@@ -65,7 +65,7 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
                   ),
                 ),
                 Visibility(child: const LinearProgressIndicator(), visible: controller.inProgress,),
-                _buildReviewAndAddReviewSection(),
+                _buildReviewAndAddReviewSection(controller.reviewList.length),
               ],
             );
           }
@@ -74,7 +74,7 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
     );
   }
 
-  Container _buildReviewAndAddReviewSection() {
+  Container _buildReviewAndAddReviewSection(int reviewCount) {
     return Container(
       height: 80,
       padding: const EdgeInsets.all(16),
@@ -86,9 +86,9 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'Reviews (1000)',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          Text(
+            'Reviews ($reviewCount)',
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
           GestureDetector(
             onTap: (){

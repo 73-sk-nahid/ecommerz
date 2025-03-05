@@ -26,7 +26,7 @@ class ProductDetails {
   List<String>? colors;
   List<String>? sizes;
   List<String>? tags;
-  Null? regularPrice;
+  int? regularPrice;
   int? currentPrice;
   int? quantity;
   String? createdAt;
