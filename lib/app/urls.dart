@@ -13,4 +13,6 @@ class Urls{
   static String toCartUrl = '$_baseURL/cart';
   static String productDetailsUrl(String productId) => '$_baseURL/products/id/$productId';
   static String reviewUrl = '$_baseURL/reviews?';
+  static String addReviewUrl = '$_baseURL/review';
+  static String userProfile = '$_baseURL/auth/profile';
 }

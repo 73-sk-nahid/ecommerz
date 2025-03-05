@@ -1,7 +1,7 @@
 import 'package:ecommerz/app/app_colors.dart';
 import 'package:ecommerz/features/common/ui/widgets/centered_circular_progress_indicator.dart';
-import 'package:ecommerz/features/product/data/model/product_details_model.dart';
 import 'package:ecommerz/features/product/ui/controller/product_review_controller.dart';
+import 'package:ecommerz/features/product/ui/screens/add_review_screen.dart';
 import 'package:ecommerz/features/product/ui/screens/create_review_screen.dart';
 import 'package:ecommerz/features/product/ui/widgets/product_review_widget.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,6 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
   final ReviewListController _controller = Get.find<ReviewListController>();
   final ScrollController _scrollController = ScrollController();
 
-
   @override
   void initState() {
     // TODO: implement initState
@@ -32,10 +31,11 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
   }
 
   void _loadMoreData() {
-    if(_scrollController.position.extentAfter < 300) {
+    if (_scrollController.position.extentAfter < 300) {
       _controller.getReviewList(widget.productId);
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,33 +43,37 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
         title: const Text('Reviews'),
       ),
       body: RefreshIndicator(
-        onRefresh: () async{
+        onRefresh: () async {
           _controller.refreshReviewList(widget.productId);
         },
-        child: GetBuilder<ReviewListController>(
-          builder: (controller) {
-            if(controller.initialInProgress){
-              return const CenteredCircularProgressIndicator();
-            }
-            return Column(
-              children: [
-                Expanded(
-                  child: GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1, childAspectRatio: 4),
-                    itemCount: controller.reviewList.length,
-                    controller: _scrollController,
-                    itemBuilder: (context, index) {
-                      return  FittedBox(child: ProductReviewWidget(reviewDataModel: controller.reviewList[index],));
-                    },
-                  ),
-                ),
-                Visibility(child: const LinearProgressIndicator(), visible: controller.inProgress,),
-                _buildReviewAndAddReviewSection(controller.reviewList.length),
-              ],
-            );
+        child: GetBuilder<ReviewListController>(builder: (controller) {
+          if (controller.initialInProgress) {
+            return const CenteredCircularProgressIndicator();
           }
-        ),
+          return Column(
+            children: [
+              Expanded(
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 1, childAspectRatio: 4),
+                  itemCount: controller.reviewList.length,
+                  controller: _scrollController,
+                  itemBuilder: (context, index) {
+                    return FittedBox(
+                        child: ProductReviewWidget(
+                      reviewDataModel: controller.reviewList[index],
+                    ));
+                  },
+                ),
+              ),
+              Visibility(
+                child: const LinearProgressIndicator(),
+                visible: controller.inProgress,
+              ),
+              _buildReviewAndAddReviewSection(controller.reviewList.length),
+            ],
+          );
+        }),
       ),
     );
   }
@@ -91,7 +95,7 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
           GestureDetector(
-            onTap: (){
+            onTap: () {
               Navigator.pushNamed(context, CreateReviewScreen.name);
             },
             child: Container(
@@ -100,10 +104,16 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
                   color: AppColors.themeColor,
                   borderRadius: BorderRadius.circular(24),
                 ),
-                child: const Icon(
-                  Icons.add,
-                  color: Colors.white,
-                  size: 32,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, AddReviewScreen.name,
+                        arguments: widget.productId);
+                  },
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: 32,
+                  ),
                 )),
           ),
         ],

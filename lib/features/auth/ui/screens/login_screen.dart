@@ -37,10 +37,10 @@ class _LoginScreenState extends State<LoginScreen> {
           key: _formKey,
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 160,
               ),
-              AppLogoWidget(),
+              const AppLogoWidget(),
               const SizedBox(
                 height: 16,
               ),
@@ -113,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               GetBuilder<LoginUserController>(builder: (controller) {
                 if (controller.inProgress) {
-                  return CenteredCircularProgressIndicator();
+                  return const CenteredCircularProgressIndicator();
                 }
                 return ElevatedButton(
                     onPressed: _onTapNextButton, child: const Text('Log In'));

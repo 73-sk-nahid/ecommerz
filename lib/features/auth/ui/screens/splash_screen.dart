@@ -1,5 +1,7 @@
 import 'package:ecommerz/features/auth/ui/screens/login_screen.dart';
+import 'package:ecommerz/features/auth/ui/screens/user_profile_screen.dart';
 import 'package:ecommerz/features/common/ui/screens/main_bottom_nav_screen.dart';
+import 'package:ecommerz/features/product/ui/screens/add_review_screen.dart';
 import 'package:ecommerz/features/product/ui/screens/product_review_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _moveToNextScreen() async{
     await Future.delayed(const Duration(seconds: 2));
-    Navigator.pushReplacementNamed(context, MainBottomNavScreen.name);
+    Navigator.pushReplacementNamed(context, UserProfileScreen.name);
   }
   @override
   Widget build(BuildContext context) {

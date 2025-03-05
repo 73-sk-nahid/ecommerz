@@ -2,7 +2,6 @@ import 'package:ecommerz/app/app_colors.dart';
 import 'package:ecommerz/features/cart/ui/controller/add_to_cart_controller.dart';
 import 'package:ecommerz/features/cart/ui/screens/cart_list_screen.dart';
 import 'package:ecommerz/features/common/ui/widgets/centered_circular_progress_indicator.dart';
-import 'package:ecommerz/features/common/ui/widgets/snackbar_message.dart';
 import 'package:ecommerz/features/product/data/model/product_details_model.dart';
 import 'package:ecommerz/features/product/ui/controller/product_details_controller.dart';
 import 'package:ecommerz/features/product/ui/screens/product_review_screen.dart';

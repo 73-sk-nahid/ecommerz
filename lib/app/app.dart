@@ -5,10 +5,12 @@ import 'package:ecommerz/features/auth/ui/screens/email_verify_screen.dart';
 import 'package:ecommerz/features/auth/ui/screens/login_screen.dart';
 import 'package:ecommerz/features/auth/ui/screens/otp_verify_screen.dart';
 import 'package:ecommerz/features/auth/ui/screens/splash_screen.dart';
+import 'package:ecommerz/features/auth/ui/screens/user_profile_screen.dart';
 import 'package:ecommerz/features/cart/ui/screens/cart_list_screen.dart';
 import 'package:ecommerz/features/category/ui/screens/category_list_screen.dart';
 import 'package:ecommerz/features/common/ui/screens/main_bottom_nav_screen.dart';
 import 'package:ecommerz/features/home/ui/screens/home_screen.dart';
+import 'package:ecommerz/features/product/ui/screens/add_review_screen.dart';
 import 'package:ecommerz/features/product/ui/screens/create_review_screen.dart';
 import 'package:ecommerz/features/product/ui/screens/product_details_screen.dart';
 import 'package:ecommerz/features/product/ui/screens/product_list_screen.dart';
@@ -31,6 +33,8 @@ class CraftyBay extends StatelessWidget {
         late Widget widget;
         if (settings.name == SplashScreen.name) {
           widget = const SplashScreen();
+        } else if(settings.name == UserProfileScreen.name) {
+          widget = UserProfileScreen();
         } else if (settings.name == LoginScreen.name) {
           widget = const LoginScreen();
         } else if (settings.name == EmailVerifyScreen.name) {
@@ -71,6 +75,10 @@ class CraftyBay extends StatelessWidget {
         }
         else if (settings.name == CreateReviewScreen.name) {
           widget = const CreateReviewScreen();
+        }
+        else if(settings.name == AddReviewScreen.name) {
+          String productId = settings.arguments as String;
+          widget =  AddReviewScreen(productID: productId,);
         }
         return MaterialPageRoute(builder: (ctx) {
           return widget;
